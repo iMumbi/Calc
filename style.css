@@ -1,0 +1,343 @@
+/* ============================================================
+   Theme tokens — light & dark via [data-theme] on <html>.
+   ============================================================ */
+:root,
+[data-theme="dark"] {
+  --bg: #0f172a;
+  --panel: #1a2235;
+  --display-bg: #0b1120;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --btn: #283449;
+  --btn-hover: #344056;
+  --fn: #1e2a3f;
+  --fn-hover: #2a384f;
+  --op: #ff9500;
+  --op-hover: #ffac3b;
+  --equals: #22c55e;
+  --equals-hover: #34d36b;
+  --danger: #ef4444;
+  --danger-hover: #f26764;
+  --accent: #38bdf8;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --focus: #38bdf8;
+}
+
+[data-theme="light"] {
+  --bg: #e2e8f0;
+  --panel: #ffffff;
+  --display-bg: #f1f5f9;
+  --text: #0f172a;
+  --muted: #64748b;
+  --btn: #e2e8f0;
+  --btn-hover: #cbd5e1;
+  --fn: #dbe3ee;
+  --fn-hover: #c7d2e0;
+  --op: #ff9500;
+  --op-hover: #f08800;
+  --equals: #16a34a;
+  --equals-hover: #15803d;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --accent: #0284c7;
+  --shadow: rgba(15, 23, 42, 0.15);
+  --focus: #0284c7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.calculator {
+  background: var(--panel);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 20px 60px var(--shadow);
+  width: 100%;
+  max-width: 380px;
+}
+
+/* ---- Top bar ---- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn,
+.text-btn {
+  background: var(--fn);
+  color: var(--text);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.icon-btn:hover,
+.text-btn:hover {
+  background: var(--fn-hover);
+}
+
+.icon-btn[aria-pressed="true"] {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ---- History panel ---- */
+.history {
+  background: var(--display-bg);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 14px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.history-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.history-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.history-load {
+  width: 100%;
+  text-align: right;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.history-load:hover {
+  background: var(--btn);
+}
+
+.history-expr {
+  font-size: 13px;
+  color: var(--muted);
+  font-family: "Courier New", monospace;
+}
+
+.history-result {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: "Courier New", monospace;
+}
+
+.history-empty {
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+  padding: 8px 0;
+}
+
+/* ---- Display ---- */
+.display {
+  background: var(--display-bg);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  text-align: right;
+  min-height: 110px;
+  display: flex;
+  flex-direction: column;
+}
+
+.status {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 22px;
+  margin-bottom: 6px;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+
+.badge-btn {
+  border: none;
+  cursor: pointer;
+}
+
+.badge-btn:hover {
+  background: color-mix(in srgb, var(--accent) 32%, transparent);
+}
+
+.expression {
+  font-size: 18px;
+  color: var(--muted);
+  font-family: "Courier New", monospace;
+  min-height: 24px;
+  word-break: break-all;
+  margin-bottom: 6px;
+}
+
+.result {
+  font-size: 38px;
+  font-weight: 300;
+  font-family: "Courier New", monospace;
+  word-break: break-all;
+  margin-top: auto;
+}
+
+.result.preview {
+  color: var(--muted);
+  font-size: 26px;
+}
+
+.result.error {
+  color: var(--danger);
+  font-size: 22px;
+}
+
+/* ---- Keypad ---- */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+button {
+  padding: 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: var(--btn);
+  color: var(--text);
+  transition: background 0.12s ease, transform 0.05s ease;
+}
+
+button:hover {
+  background: var(--btn-hover);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button.fn {
+  background: var(--fn);
+  font-size: 16px;
+}
+
+button.fn:hover {
+  background: var(--fn-hover);
+}
+
+button.op {
+  background: var(--op);
+  color: #1a1a1a;
+}
+
+button.op:hover {
+  background: var(--op-hover);
+}
+
+button.equals {
+  background: var(--equals);
+  color: #fff;
+  grid-row: span 2; /* tall equals fills the bottom-right cell */
+}
+
+button.equals:hover {
+  background: var(--equals-hover);
+}
+
+button.danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+button.danger:hover {
+  background: var(--danger-hover);
+}
+
+/* ---- Accessibility: visible focus ring ---- */
+button:focus-visible,
+.history-load:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* High-contrast preference */
+@media (prefers-contrast: more) {
+  button {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  button {
+    transition: none !important;
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 420px) {
+  .calculator {
+    max-width: 100%;
+    padding: 14px;
+  }
+  button {
+    padding: 14px 0;
+    font-size: 16px;
+  }
+  .result {
+    font-size: 30px;
+  }
+}

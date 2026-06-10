@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A fast, accessible scientific calculator.">
+  <title>Scientific Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="calculator" role="application" aria-label="Scientific calculator">
+    <header class="topbar">
+      <h1 class="title">Calculator</h1>
+      <div class="topbar-actions">
+        <button type="button" id="historyToggle" class="icon-btn" aria-label="Toggle calculation history" aria-pressed="false">History</button>
+        <button type="button" id="themeToggle" class="icon-btn" aria-label="Toggle light and dark theme" aria-pressed="false">Theme</button>
+      </div>
+    </header>
+
+    <!-- Calculation history panel -->
+    <section id="historyPanel" class="history" hidden aria-label="Calculation history">
+      <div class="history-head">
+        <span>History</span>
+        <button type="button" id="historyClear" class="text-btn">Clear</button>
+      </div>
+      <ul id="historyList" class="history-list" role="list"></ul>
+      <p id="historyEmpty" class="history-empty">No calculations yet.</p>
+    </section>
+
+    <!-- Display -->
+    <div class="display">
+      <div class="status">
+        <span id="memoryIndicator" class="badge" aria-live="polite" hidden>M</span>
+        <button type="button" id="angleToggle" class="badge badge-btn" aria-label="Toggle angle mode degrees or radians">DEG</button>
+      </div>
+      <output id="expression" class="expression" aria-label="Current expression"></output>
+      <output id="result" class="result" aria-live="polite" aria-label="Result">0</output>
+    </div>
+
+    <!-- Keypad -->
+    <div class="buttons" role="group" aria-label="Calculator keys">
+      <button type="button" data-action="memory" data-mem="MC" class="fn" aria-label="Memory clear">MC</button>
+      <button type="button" data-action="memory" data-mem="MR" class="fn" aria-label="Memory recall">MR</button>
+      <button type="button" data-action="memory" data-mem="M+" class="fn" aria-label="Memory add">M+</button>
+      <button type="button" data-action="memory" data-mem="M-" class="fn" aria-label="Memory subtract">M&minus;</button>
+      <button type="button" data-action="clear" class="fn danger" aria-label="All clear">AC</button>
+
+      <button type="button" data-action="append" data-value="sin(" class="fn" aria-label="sine">sin</button>
+      <button type="button" data-action="append" data-value="cos(" class="fn" aria-label="cosine">cos</button>
+      <button type="button" data-action="append" data-value="tan(" class="fn" aria-label="tangent">tan</button>
+      <button type="button" data-action="append" data-value="(" class="fn" aria-label="open parenthesis">(</button>
+      <button type="button" data-action="append" data-value=")" class="fn" aria-label="close parenthesis">)</button>
+
+      <button type="button" data-action="append" data-value="ln(" class="fn" aria-label="natural logarithm">ln</button>
+      <button type="button" data-action="append" data-value="log(" class="fn" aria-label="base 10 logarithm">log</button>
+      <button type="button" data-action="append" data-value="sqrt(" class="fn" aria-label="square root">&radic;</button>
+      <button type="button" data-action="append" data-value="^" class="fn" aria-label="power">x^y</button>
+      <button type="button" data-action="append" data-value="!" class="fn" aria-label="factorial">x!</button>
+
+      <button type="button" data-action="append" data-value="π" class="fn" aria-label="pi">&pi;</button>
+      <button type="button" data-action="append" data-value="e" class="fn" aria-label="Euler's number">e</button>
+      <button type="button" data-action="reciprocal" class="fn" aria-label="reciprocal">1/x</button>
+      <button type="button" data-action="append" data-value="%" class="fn" aria-label="percent">%</button>
+      <button type="button" data-action="negate" class="fn" aria-label="toggle sign">&plusmn;</button>
+
+      <button type="button" data-action="append" data-value="7">7</button>
+      <button type="button" data-action="append" data-value="8">8</button>
+      <button type="button" data-action="append" data-value="9">9</button>
+      <button type="button" data-action="delete" class="fn" aria-label="delete">DEL</button>
+      <button type="button" data-action="append" data-value="/" class="op" aria-label="divide">&divide;</button>
+
+      <button type="button" data-action="append" data-value="4">4</button>
+      <button type="button" data-action="append" data-value="5">5</button>
+      <button type="button" data-action="append" data-value="6">6</button>
+      <button type="button" data-action="answer" class="fn" aria-label="last answer">ANS</button>
+      <button type="button" data-action="append" data-value="*" class="op" aria-label="multiply">&times;</button>
+
+      <button type="button" data-action="append" data-value="1">1</button>
+      <button type="button" data-action="append" data-value="2">2</button>
+      <button type="button" data-action="append" data-value="3">3</button>
+      <button type="button" data-action="equals" class="equals" aria-label="equals">=</button>
+      <button type="button" data-action="append" data-value="-" class="op" aria-label="subtract">&minus;</button>
+
+      <button type="button" data-action="append" data-value="0">0</button>
+      <button type="button" data-action="append" data-value="." aria-label="decimal point">.</button>
+      <button type="button" data-action="append" data-value="00" aria-label="double zero">00</button>
+      <button type="button" data-action="append" data-value="+" class="op" aria-label="add">+</button>
+    </div>
+  </main>
+
+  <script src="js/engine.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>
