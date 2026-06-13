@@ -51,6 +51,16 @@
       return n < 0 ? `(${s})` : s;
     }
 
+    // Auto-close unclosed groups so function buttons (which insert "sin(" etc.)
+    // evaluate naturally without the user remembering the closing ")".
+    // Only appends when parens are net-open; an extra ")" is left to error.
+    function balanceParens(s) {
+      const opens = (s.match(/\(/g) || []).length;
+      const closes = (s.match(/\)/g) || []).length;
+      const missing = opens - closes;
+      return missing > 0 ? s + ")".repeat(missing) : s;
+    }
+
     // Internal token form -> human-readable display form.
     function pretty(s) {
       return s
@@ -87,7 +97,7 @@
       } else {
         // Live preview of the in-progress expression (muted).
         try {
-          const v = Engine.evaluate(expr, { angleMode: angleMode() });
+          const v = Engine.evaluate(balanceParens(expr), { angleMode: angleMode() });
           el.result.textContent = formatNumber(v);
           el.result.classList.add("preview");
         } catch {
@@ -118,9 +128,11 @@
 
     function equals() {
       if (expr === "") return;
+      const balanced = balanceParens(expr);
       try {
-        const v = Engine.evaluate(expr, { angleMode: angleMode() });
-        Store.addHistory(expr, formatNumber(v));
+        const v = Engine.evaluate(balanced, { angleMode: angleMode() });
+        Store.addHistory(balanced, formatNumber(v));
+        expr = balanced; // reflect the completed (closed) expression on screen
         lastResult = v;
         justEvaluated = true;
         errored = false;
@@ -185,7 +197,7 @@
     function currentValue() {
       if (expr !== "") {
         try {
-          return Engine.evaluate(expr, { angleMode: angleMode() });
+          return Engine.evaluate(balanceParens(expr), { angleMode: angleMode() });
         } catch {
           /* fall through to last result */
         }
